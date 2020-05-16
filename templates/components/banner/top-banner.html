@@ -1,0 +1,99 @@
+<section class="banner">
+    <div class="banner__slick">
+        {% if body_id == "home-page" %}
+        <div id="home-banner-1" class="banner__slick__slide">
+            <div class="banner__slick__slide__content">
+                <h2 class="banner__slick__slide__content__header">We Love Beer...</h2>
+                <p class="banner__slick__slide__content__text">Join our family today and start sharing your
+                    favourite craft beverages.</p>
+                <div class="banner__slick__slide__content__button-wrapper">
+                    {% if session['username'] %}
+                    <a aria-label="My List" class="btn btn__primary banner__slick__slide__content__button-wrapper__button"
+                        href="{{ url_for('my_list') }}">My List</a>
+                    {% else %}
+                    <a aria-label="Sign In" class="btn btn__primary banner__slick__slide__content__button-wrapper__button"
+                        href="{{ url_for('sign_in') }}">Sign In</a>
+                    {% endif %}
+                    <a aria-label="Beers" class="btn btn__no-inner banner__slick__slide__content__button-wrapper__button"
+                        href="{{ url_for('beers') }}">All Beers</a>
+                </div>
+            </div>
+        </div>
+        <div id="home-banner-2" class="banner__slick__slide">
+            <div class="banner__slick__slide__content">
+                <h2 class="banner__slick__slide__content__header">We Love Beer...</h2>
+                <p class="banner__slick__slide__content__text">Join our family today and start sharing your
+                    favourite craft beverages.</p>
+                <div class="banner__slick__slide__content__button-wrapper">
+                    {% if session['username'] %}
+                    <a aria-label="My List" class="btn btn__primary banner__slick__slide__content__button-wrapper__button"
+                        href="{{ url_for('my_list') }}">My List</a>
+                    {% else %}
+                    <a aria-label="Sign In" class="btn btn__primary banner__slick__slide__content__button-wrapper__button"
+                        href="{{ url_for('sign_in') }}">Sign In</a>
+                    {% endif %}
+                    <a aria-label="Beers" class="btn btn__no-inner banner__slick__slide__content__button-wrapper__button"
+                        href="{{ url_for('beers') }}">All Beers</a>
+                </div>
+            </div>
+        </div>
+        <div id="home-banner-3" class="banner__slick__slide">
+            <div class="banner__slick__slide__content">
+                <h2 class="banner__slick__slide__content__header">We Love Beer...</h2>
+                <p class="banner__slick__slide__content__text">Join our family today and start sharing your
+                    favourite craft beverages.</p>
+                <div class="banner__slick__slide__content__button-wrapper">
+                    {% if session['username'] %}
+                    <a aria-label="My List" class="btn btn__primary banner__slick__slide__content__button-wrapper__button"
+                        href="{{ url_for('my_list') }}">My List</a>
+                    {% else %}
+                    <a aria-label="Sign In" class="btn btn__primary banner__slick__slide__content__button-wrapper__button"
+                        href="{{ url_for('sign_in') }}">Sign In</a>
+                    {% endif %}
+                    <a aria-label="Beers" class="btn btn__no-inner banner__slick__slide__content__button-wrapper__button"
+                        href="{{ url_for('beers') }}">All Beers</a>
+                </div>
+            </div>
+        </div>
+        {% elif body_id != "" %}
+        <div id="page-banner-1" class="banner__slick__slide">
+            <div class="banner__slick__slide__content">
+                <h2 class="banner__slick__slide__content__header">{{ page_title }}</h2>
+                <p class="banner__slick__slide__content__text">Remember, you can add beers to your personal list as a
+                    quick reference for when you're out and about.</p>
+                <div class="banner__slick__slide__content__button-wrapper">
+                    {% if session['username'] %}
+                    <a aria-label="My List" class="btn btn__primary banner__slick__slide__content__button-wrapper__button"
+                        href="{{ url_for('my_list') }}">My List</a>
+                    {% else %}
+                    <a aria-label="Sign In" class="btn btn__primary banner__slick__slide__content__button-wrapper__button"
+                        href="{{ url_for('sign_in') }}">Sign In</a>
+                    {% endif %}
+                    <a aria-label="Beers" class="btn btn__no-inner banner__slick__slide__content__button-wrapper__button"
+                        href="{{ url_for('beers') }}">All Beers</a>
+                </div>
+            </div>
+        </div>
+        <div id="page-banner-2" class="banner__slick__slide">
+            <div class="banner__slick__slide__content">
+                <h2 class="banner__slick__slide__content__header">{{ page_title }}</h2>
+                <p class="banner__slick__slide__content__text">Get in touch with us and one of our fantastic team
+                    members will be back in touch shortly.</p>
+                <div class="banner__slick__slide__content__button-wrapper">
+                    <a aria-label="Contact Us" class="btn btn__no-inner banner__slick__slide__content__button-wrapper__button"
+                        href="/contact">Contact Us</a>
+                    {% if session['username'] %}
+                    <a aria-label="My List" class="btn btn__primary banner__slick__slide__content__button-wrapper__button"
+                        href="{{ url_for('my_list') }}">My List</a>
+                    {% else %}
+                    <a aria-label="Sign In" class="btn btn__primary banner__slick__slide__content__button-wrapper__button"
+                        href="{{ url_for('sign_in') }}">Sign In</a>
+                    {% endif %}
+                    <a aria-label="Beers" class="btn btn__no-inner banner__slick__slide__content__button-wrapper__button"
+                        href="{{ url_for('beers') }}">All Beers</a>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</section>

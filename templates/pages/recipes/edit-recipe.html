@@ -1,0 +1,69 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+<section class="row">
+    <div class="col-sm-12">
+        <h1 class="add-beer-title">Edit {{beer.name}}</h1>
+    </div>
+</section>
+<section class="add-beer-form-background row">
+    <div class="col-sm-12">
+        <form id="update-this-beer" action="{{ url_for('edit_beer', beer_id=beer._id) }}" method="POST"
+            class="add-beer-form">
+            <div class="add-beer-form__collection">
+                <div class="add-beer-form__group">
+                    <div class="add-beer-form__group__text">
+                        <label for="name">Name</label>
+                    </div>
+                    <input id="name" name="name" type="text" value="{{beer.name}}">
+                </div>
+                <div class="add-beer-form__group">
+                    <div class="add-beer-form__group__text">
+                        <label for="name">Brewery</label>
+                    </div>
+                    <input id="brewery" name="brewery" type="text" value="{{beer.brewery}}">
+                </div>
+                <div class="add-beer-form__group">
+                    <div class="add-beer-form__group__text">
+                        <label for="name">Beer Types</label>
+                    </div>
+                    <select name="type" id="type">
+                        <option value="" disabled selected>Select type...</option>
+                        {% for type in types %}
+                        <option value="{{ type.beer_type }}">{{ type.beer_type }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="add-beer-form__group">
+                    <div class="add-beer-form__group__text">
+                        <label for="name">Excerpt</label>
+                    </div>
+                    <input id="excerpt" name="excerpt" type="text" value="{{beer.excerpt}}">
+                </div>
+                <div class="add-beer-form__group">
+                    <div class="add-beer-form__group__text">
+                        <label for="name">Notes</label>
+                    </div>
+                    <textarea id="notes" name="notes" type="text" cols="50" rows="10">{{beer.notes}}</textarea>
+                </div>
+                <div class="add-beer-form__group">
+                    <div class="add-beer-form__group__text">
+                        <label for="name">ABV</label>
+                    </div>
+                    <input id="abv" name="abv" type="text" value="{{beer.abv}}">
+                </div>
+                <div class="add-beer-form__group">
+                    <div class="add-beer-form__group__text">
+                        <label for="name">Image</label>
+                    </div>
+                    <input id="image" name="image" type="text" required placeholder="update file path">
+                    <p>Current image:</p>
+                    <img class="img-responsive" src="/{{beer.image}}" alt="{{beer.name}}">
+                </div>
+                <div class="add-beer-form__group">
+                    <input class="btn btn__primary" type="submit" value="Update Beer">
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
+{% endblock %}

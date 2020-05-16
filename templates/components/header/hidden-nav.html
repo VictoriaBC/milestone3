@@ -1,0 +1,26 @@
+<nav class="hidden-nav">
+    <div class="hidden-nav__panel">
+        <div class="hidden-nav__panel__inner">
+            <p class="hidden-nav__title">Beer Time</p>
+            <ul class="hidden-nav__panel__list">
+                <li class="hidden-nav__panel__list__item"><a aria-label="Home" href="{{ url_for('index') }}">Home</a></li>
+                <li class="hidden-nav__panel__list__item"><a aria-label="Beers" href="{{ url_for('beers') }}">All
+                        Beers</a></li>
+                
+                    {% if session['username'] %}
+                    {% if current_user['admin'] == true %}
+                <li class="hidden-nav__panel__list__item"><a aria-label="Add Beer" href="{{ url_for('add_beer') }}">Add a
+                        Beer</a>
+                    {% endif%}
+                <li class="hidden-nav__panel__list__item"><a aria-label="My List" href="{{ url_for('my_list') }}">My List</a>
+                <li class="hidden-nav__panel__list__item"><a aria-label="Sign Out" href="{{ url_for('sign_out') }}">Sign Out</a>
+                </li>
+                {% else %}
+                <li class="hidden-nav__panel__list__item"><a aria-label="Sign In" href="{{ url_for('sign_in') }}">Sign In</a>
+                </li>
+                {% endif %}
+
+            </ul>
+        </div>
+    </div>
+</nav>

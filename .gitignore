@@ -1,0 +1,6 @@
+/__pycache__
+/.sass-cache
+/static/css/index.min.css.map
+/env
+/.vscode
+/.ds_store

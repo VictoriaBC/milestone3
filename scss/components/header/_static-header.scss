@@ -1,0 +1,31 @@
+.static-nav {
+  padding: 10px 30px;
+  background: $primary-color;
+  width: 100%;
+  transition: $default-transition;
+  box-shadow: $default-box-shadow;
+
+  &__inner {
+    padding: 0 40px;
+
+    &__nav {
+      list-style: none;
+      display: flex;
+
+      &__item {
+        padding: 0 10px;
+
+        a {
+          color: $secondary-color;
+          transition: $default-transition;
+          text-shadow: $default-text-shadow;
+
+          &:hover {
+            color: darken($secondary-color, 10%);
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{% extends 'layout/base.html' %}
+{% block content %}
+<section class="row">
+    <div class="col-sm-12">
+        <div class="my-list">
+            {% if favourite_beers|length %}
+            <h2 class="my-list__title">Browse your list</h2>
+            {% else %}
+            <div class="my-list__no-beers">
+                <h2 class="my-list__title">Oh No!</h2>
+                <p class="my-list__text">Your list is empty</p>
+                <p class="my-list__text">Use the button below to browse our beers</p>
+            </div>
+            <a aria-label="Beers" class="btn btn__primary" href="{{ url_for('beers') }}">View Beers</a>
+            {% endif %}
+        </div>
+    </div>
+</section>
+<section class="row">
+    {% for beer in favourite_beers %}
+    <div class="col-md-4 col-sm-12">
+        {% include 'components/beer-panel.html' %}
+    </div>
+    {% endfor %}
+    </section>
+    {% endblock %}

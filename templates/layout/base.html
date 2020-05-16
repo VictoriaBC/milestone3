@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'layout/head.html' %}
+</head>
+{% include 'components/header/header.html' %}
+{% include 'components/header/hidden-nav.html' %}
+
+<body id="{{ body_id }}">
+    {% include 'components/banner/top-banner.html' %}
+    <main class="page-padding container">
+        {% block content %} {% endblock %}
+    </main>
+    {% block beers_list %} {% endblock %}
+    {% include 'components/footer/footer.html' %}
+    {% include 'components/overlay.html' %}
+    {% include 'layout/scripts.html' %}
+</body>
+
+</html>

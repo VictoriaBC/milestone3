@@ -1,0 +1,50 @@
+<div class="beer-panel">
+    <a aria-label="View This Beer" href="{{url_for('beer_page', beer_id=beer._id)}}">
+        <div class="beer-panel__main-wrapper">
+            <div class="beer-panel__image">
+                <img class="img-responsive" src="{{ beer.image }}" alt="{{ beer.name }}">
+            </div>
+            <div class="beer-panel__wrapper">
+                <div class="beer-panel__text">
+                    <h2>{{ beer.name }}</h2>
+                    <p>Brewery: {{ beer.brewery }}</p>
+                    <p>Type: {{ beer.type }}</p>
+                    <p>ABV: {{ beer.abv }}</p>
+                </div>
+                <div class="beer-panel__links">
+                    {% if beer._id in favourite_beers_id %}
+                    <form class="remove-from-favourites"
+                        action="{{ url_for('remove_from_favourites', beer_id=beer._id) }}" method="POST">
+                        <div class="checkbox-custom">
+                            <div class="checkbox-custom__wrapper">
+                                <input data-toggle="tooltip" data-placement="auto" title="Remove from favourites"
+                                    type="checkbox" id="favourite" class="favourite checkbox-custom__input checkedBox">
+                            </div>
+                            <label class="checkbox-custom__label"></label>
+                        </div>
+                    </form>
+                    {% else %}
+                    <form class="add-to-favourites" action="{{ url_for('add_to_favourites', beer_id=beer._id) }}"
+                        method="POST">
+                        <div class="checkbox-custom">
+                            <div class="checkbox-custom__wrapper">
+                                <input data-toggle="tooltip" data-placement="auto" title="Add to favourites"
+                                    type="checkbox" id="favourite" class="favourite checkbox-custom__input">
+                            </div>
+                            <label class="checkbox-custom__label">Favourite?</label>
+                        </div>
+                    </form>
+                    {% endif %}
+                </div>
+                {% if current_user['admin'] == true %}
+                <div class="beer-panel__admin-links">
+                    <a aria-label="Edit This Beer" class="ud-button-edit beer-panel__admin-links__link"
+                        href="{{ url_for('edit_beer', beer_id=beer._id)}}"><i class="fas fa-edit"></i></a>
+                    <a aria-label="Delete This Beer" class="ud-button-delete beer-panel__admin-links__link"
+                        href="{{ url_for('delete_beer', beer_id=beer._id)}}"><i class="fas fa-trash"></i></a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </a>
+</div>
