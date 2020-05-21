@@ -1,0 +1,657 @@
+@import url("https://use.fontawesome.com/releases/v5.8.1/css/all.css");
+
+/* ---------------- General rules ------------------ */
+
+body {
+    font-family: "Roboto", sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+footer {
+    height: 90px;
+    background-color: #3E3F3A;
+    color: #adb5bd;
+    bottom: 0;
+    width: 100%;
+}
+
+h1
+h2,
+h3 {
+    text-align: center;
+    font-weight: 700;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+    font-family: Roboto;
+}
+
+h4,
+h5,
+h6 {
+    text-align: center;
+    font-weight: 700;
+}
+
+/* -- Makes sure an empty page keeps the footer at the bottom -- */
+
+.empty-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+/* -- Page Heading -- */
+
+.page-heading {
+    margin-top: 15px;
+}
+
+/* -- Form Input Fields and Button Shadows -- */
+
+.form-control {
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+}
+
+.btn {
+    box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .2);
+}
+
+/* ---------------- Button Rules ----------------- */
+
+/*--- Style taken from an online button generator, link in README under Acknowledgements  ---*/
+
+.btn-sq-lg {
+    width: 150px !important;
+    height: 150px !important;
+    padding-top: 15px;
+    border-radius: 0.5rem;
+}
+
+
+/* -- Pink button rules -- */
+
+.btn-pink.active {
+    color: rgba(255, 255, 255, 0.75);
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
+}
+
+.btn-pink {
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #ff6395;
+    background-image: -moz-linear-gradient(top, #ff4f87, #ff82aa);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ff4f87), to(#ff82aa));
+    background-image: -webkit-linear-gradient(top, #ff4f87, #ff82aa);
+    background-image: -o-linear-gradient(top, #ff4f87, #ff82aa);
+    background-image: linear-gradient(to bottom, #ff4f87, #ff82aa);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff4f87', endColorstr='#ffff82aa', GradientType=0);
+    border-color: #ff82aa #ff82aa #ff3576;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #ff82aa;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.btn-pink:hover,
+.btn-pink.hover {
+    background-image: -moz-linear-gradient(top, #ff4f87, #ff1c64);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ff4f87), to(#ff1c64));
+    background-image: -webkit-linear-gradient(top, #ff4f87, #ff1c64);
+    background-image: -o-linear-gradient(top, #ff4f87, #ff1c64);
+    background-image: linear-gradient(to bottom, #ff4f87, #ff1c64);
+    color: #fff;
+}
+
+.btn-pink:focus,
+.btn-pink:active,
+.btn-pink.active,
+.btn-pink.disabled {
+    color: #ffffff;
+    background-color: #ff82aa;
+    *background-color: #ff6898;
+}
+
+.btn-pink:active,
+.btn-pink.active {
+    background-color: #ff4f87;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.225);
+}
+
+.btn-details.active {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* -- Blue Details button rules - Used for Edit recipe, add new tags and ingredients buttons -- */
+
+.btn-details {
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #3bb2e3;
+    background-image: -moz-linear-gradient(top, #29abe0, #56bce6);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#29abe0), to(#56bce6));
+    background-image: -webkit-linear-gradient(top, #29abe0, #56bce6);
+    background-image: -o-linear-gradient(top, #29abe0, #56bce6);
+    background-image: linear-gradient(to bottom, #29abe0, #56bce6);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff29abe0', endColorstr='#ff56bce6', GradientType=0);
+    border-color: #56bce6 #56bce6 #1e9dd1;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #56bce6;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.btn-details:hover,
+.btn-details.hover {
+    background-image: -moz-linear-gradient(top, #29abe0, #1b8dbb);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#29abe0), to(#1b8dbb));
+    background-image: -webkit-linear-gradient(top, #29abe0, #1b8dbb);
+    background-image: -o-linear-gradient(top, #29abe0, #1b8dbb);
+    background-image: linear-gradient(to bottom, #29abe0, #1b8dbb);
+    color: #fff;
+}
+
+.btn-details:focus,
+.btn-details:active,
+.btn-details.active,
+.btn-details.disabled,
+.btn-details[disabled] {
+    color: #ffffff;
+    background-color: #56bce6;
+    *background-color: #3fb4e3;
+}
+
+.btn-details:active,
+.btn-details.active {
+    background-color: #29abe0;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.225);
+}
+
+.btn-main.active {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+/* -- Dark blue button rules - primary button colour on the website -- */
+
+.btn-main {
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #376797;
+    background-image: -moz-linear-gradient(top, #325d88, #4076ad);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#325d88), to(#4076ad));
+    background-image: -webkit-linear-gradient(top, #325d88, #4076ad);
+    background-image: -o-linear-gradient(top, #325d88, #4076ad);
+    background-image: linear-gradient(to bottom, #325d88, #4076ad);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff325d88', endColorstr='#ff4076ad', GradientType=0);
+    border-color: #4076ad #4076ad #2b5075;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #4076ad;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.btn-main:hover,
+.btn-main.hover {
+    background-image: -moz-linear-gradient(top, #325d88, #244363);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#325d88), to(#244363));
+    background-image: -webkit-linear-gradient(top, #325d88, #244363);
+    background-image: -o-linear-gradient(top, #325d88, #244363);
+    background-image: linear-gradient(to bottom, #325d88, #244363);
+    color: #fff;
+}
+
+.btn-main:focus,
+.btn-main:active,
+.btn-main.active,
+.btn-main.disabled,
+.btn-main[disabled] {
+    color: #ffffff;
+    background-color: #4076ad;
+    *background-color: #396a9b;
+}
+
+.btn-main:active,
+.btn-main.active {
+    background-color: #325d88;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.225);
+}
+
+
+/* -- Red Delete button rules - used for Delete recipe, Remove from Favourites button -- */
+
+.btn-delete.active {
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.btn-delete {
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #f4150f;
+    background-image: -moz-linear-gradient(top, #ed0801, #fe2923);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ed0801), to(#fe2923));
+    background-image: -webkit-linear-gradient(top, #ed0801, #fe2923);
+    background-image: -o-linear-gradient(top, #ed0801, #fe2923);
+    background-image: linear-gradient(to bottom, #ed0801, #fe2923);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffed0801', endColorstr='#fffe2923', GradientType=0);
+    border-color: #fe2923 #fe2923 #d40701;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    *background-color: #fe2923;
+    /* Darken IE7 buttons by default so they stand out more given they won't have borders */
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+
+.btn-delete:hover,
+.btn-delete.hover {
+    background-image: -moz-linear-gradient(top, #ed0801, #ba0601);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ed0801), to(#ba0601));
+    background-image: -webkit-linear-gradient(top, #ed0801, #ba0601);
+    background-image: -o-linear-gradient(top, #ed0801, #ba0601);
+    background-image: linear-gradient(to bottom, #ed0801, #ba0601);
+    color: #fff;
+}
+
+.btn-delete:focus,
+.btn-delete:active,
+.btn-delete.active,
+.btn-delete.disabled,
+.btn-delete[disabled] {
+    color: #ffffff;
+    background-color: #fe2923;
+    *background-color: #fe110a;
+}
+
+.btn-delete:active,
+.btn-delete.active {
+    background-color: #ed0801;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.225);
+}
+
+/* -- Recipe Name Links -- */
+
+.name-link {
+    color: #3E3F3A;
+}
+
+.name-link:hover {
+    color: #242522;
+}
+
+/* --------------------  Navbar (from Bootstrap/Bootswatch) ----------------------- */
+
+.bg-primary {
+    width: 100%;
+}
+
+/* -- Recipe Brand Name - "Recipe Book" -- */
+
+.navbar-brand {
+    font-size: 2em;
+    height: 55px;
+    font-weight: 700;
+    text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);
+}
+
+/*--- Navbar links  ---*/
+
+.nav-link {
+    font-size: 1em;
+    text-transform: capitalize;
+    text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);
+    cursor: pointer;
+}
+
+
+
+/* ----------------- Social Media Links in Footer ------------------ */
+
+/*--- taken from Bootsnipp.com, link in README under Acknowledgements  ---*/
+
+.social:hover {
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -o-transform: scale(1.1);
+}
+
+.social {
+    line-height: 20px;
+    color: #fff;
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -o-transform: scale(0.8);
+    transform: scale(0.8);
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+}
+
+
+
+/* ---------------------- Intro Page ------------------------ */
+
+/*--- Background Image  ---*/
+
+.intro-container {
+    background: url(../images/introbg.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    min-height: 800px;
+}
+
+/*--- Welcome Intro Container  ---*/
+
+.heading-container {
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+/*--- Welcome Intro Heading  ---*/
+
+.intro-heading {
+    color: #fff;
+    font-family: 'Roboto Slab', serif;
+    text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);
+}
+
+/*--- Welcome Intro Sub-Heading  ---*/
+
+.intro-subheading {
+    text-transform: capitalize;
+    color: #fff;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 1.3rem;
+    text-shadow: 0.075em 0.08em 0.1em rgba(0, 0, 0, 1);
+}
+
+/*--- Font-Awesome Icon styling on Intro Page buttons ---*/
+
+.intro-icon {
+    font-size: 7em;
+    padding-top: 5px;
+}
+
+/* ------------------ Search features ------------------ */
+
+.recipe-search {
+    margin-top: 20px;
+    margin-bottom: 5px;
+}
+
+
+/* ---------------- Most Popular section ----------------- */
+
+/* -- Most Popular heading --*/
+
+.popular-header {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/* -- Most Popular Toggle Button --*/
+
+.toggle-popular {
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+/* ------------------ Recipe Card Display ------------------- */
+
+/* -- Full Recipe Card -- */
+
+.card {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    min-height: 640px;
+    box-shadow: 0 19px 38px rgba(0, 0, 0, 0.30),
+    0 15px 12px rgba(0, 0, 0, 0.22);
+}
+
+.card-body {
+    padding-top: 5px;
+}
+
+/* -- Recipe Card Image -- */
+
+.card-img-top {
+    height: 20rem;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    position: relative;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+/* -- Recipe Card Details -- */
+
+.card-details {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+}
+
+.recipe-input {
+    color: #ff4f87;
+    font-size: 1.7em;
+    font-weight: 900;
+    padding: 10px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.recipe-variable {
+    font-size: 1.4em;
+    text-align: justify;
+}
+
+
+/* ----------------- Recipe Display Page ------------------- */
+
+.recipe {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/* -- Recipe Image -- */
+
+.card-img-display {
+    width: 100%;
+    height: 23rem;
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+    position: relative;
+    border-radius: 10px;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 40px rgba(0, 0, 0, 0.1) inset;
+}
+
+/* -- Recipe variables -- */
+
+.recipe-stats {
+    color: #ff4f87;
+    font-weight: bold;
+}
+
+
+.instructions {
+    white-space: pre-wrap;
+    list-style: none;
+}
+
+/* -- Recipe Page Buttons -- */
+
+.recipe-buttons {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+/* ---------- Delete Recipe Modal --------- */
+
+.modal-header .close {
+    margin-left: 0px;
+}
+
+/* -- Modal Heading -- */
+
+.modal-title {
+    margin: 0 auto;
+}
+
+/* -- Modal paragraph -- */
+
+.delete-warning {
+    text-align: center;
+    margin-bottom: 0px
+}
+
+/* -- Modal Buttons -- */
+
+.delete-buttons {
+    padding-bottom: 16px;
+}
+
+
+/* --------- Pagination Styling --------- */
+
+.pagination {
+    margin: 0 auto;
+    float: none;
+    margin-bottom: 10px;
+}
+
+
+/* -------------------- Edit/Add Recipe Page ----------------- */
+
+.input-group {
+    padding-bottom: 2px;
+}
+
+/* -- Form Buttons -- */
+
+.form-buttons {
+    padding-top: 5px;
+    color: white;
+    cursor: pointer;
+}
+
+/* -- Form Headings -- */
+
+.form-headings {
+    text-align: left!important;
+}
+
+/* -------------------- Login/Register Page ----------------- */
+
+/* -- Login Card -- */
+
+.login-card {
+    max-width: 20rem;
+    margin-top: 6rem;
+    margin-bottom: 6rem!important;
+    height: 30rem;
+
+}
+
+/* -- Login/Register link styles -- */
+
+.here-link {
+    color: #ff4f87;
+}
+
+.here-link:hover {
+    color: #ff1c64;
+}
+
+/* -- Register Card -- */
+
+.register-card {
+    max-width: 20rem;
+    margin-top: 6rem;
+    margin-bottom: 6rem!important;
+    height: 35rem;
+
+}
+
+/* -- Profile icon styling -- */
+
+.profile-img-card {
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+    display: block;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.user-form-button {
+    margin-top: 25px;
+}
+
+/* -- User info box -- */
+
+.form-info {
+    background-color: #ffff91;
+    color: #000;
+    padding: 5px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+/* -------------------- Admin Page ----------------- */
+
+/* -- Accordion Admin Report Card styles -- */
+
+.card-accordion {
+    min-height: 0;
+}
+
+.card-header {
+    cursor: pointer;
+}
+
+/* -- Font-Awesome Icons change when the accordion is open/closed -- */
+
+.accordion .card-header:after {
+    font-family: "Font Awesome 5 Free";
+    /* -- Minus icon -- */
+    content: "\f068";
+    float: right;
+    font-weight: 600;
+}
+
+.accordion .card-header.collapsed:after {
+    /*symbol for "collapsed" panels */
+    /* -- Plus icon -- */
+    content: "\f067";
+    font-weight: 600;
+}
+
+/* -- Admin Report Table -- */
+
+.table th,
+.table td {
+    font-size: small;
+}
+
+
+
+
+/*--- Media Queries  ---*/
+
+@media (max-width: 575.98px) {
+    .table td {
+        font-size: xx-small;
+    }
+}

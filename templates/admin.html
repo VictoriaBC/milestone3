@@ -1,0 +1,128 @@
+{% extends 'base.html' %} {%block content%}
+
+<!-- ADMIN PAGE -->
+<div class="container-fluid empty-page">
+
+    <h2 class="page-heading"> Admin Reports </h2>
+
+    <!-- Admin's Reports Collapsable Accordion Display -->
+    <div id="accordion" class="accordion">
+        <div class="card card-accordion">
+            
+            <!-- User Report Card -->
+            <div class="card-header collapsed" data-toggle="collapse" href="#collapseOne">
+                <a class="card-title">
+                    <b>Users Report</b>
+                </a>
+            </div>
+            <div id="collapseOne" class="card-body collapse" data-parent="#accordion">
+                
+                <!-- Total User Count -->
+                <p><em>User Count - {{ users.count() }}</em></p>
+                <table class="table table-hover">
+                    
+                    <!-- User Table Headings -->
+                    <thead>
+                        <tr>
+                            <th scope="col">Username</th>
+                            <th scope="col">Date Created</th>
+                            <th scope="col">No of Favourites</th>
+                        </tr>
+                    </thead>
+                    
+                    <!-- User Table Info -->
+                    <tbody>
+                        {% for user in users %}
+                        <tr>
+                            <!-- Link to User's Profile Page -->
+                            <th scope="row"><em><a href="{{url_for('profile', user=user.username) }}">{{ user.username }}</a></em></th>
+                            <td>{{ user['_id'].generation_time.date().strftime('%d.%m.%Y') }}</td>
+                            <td>{{ user.favourite_recipes|length }}</td>
+                            {% for created in recipes_created %}
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Recipes Report Card -->
+            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">
+                <a class="card-title">
+                  <b>Recipes Report</b>
+                </a>
+            </div>
+            <div id="collapseTwo" class="card-body collapse" data-parent="#accordion">
+                
+                <!-- Total Current Recipe Count -->
+                <p><em>Recipe Count - {{ recipes.count() }}</em></p>
+                <table class="table table-hover">
+                    
+                    <!-- Recipe Table Headings -->
+                    <thead>
+                        <tr>
+                            <th scope="col">Recipe</th>
+                            <th scope="col">Date Created</th>
+                            <th scope="col">Author</th>
+                            <th scope="col">Favourited</th>
+                        </tr>
+                    </thead>
+                    
+                    <!-- Recipe Table Info -->
+                    <tbody>
+                        {% for recipe in recipes %}
+                        <tr>
+                            <!-- Link to Recipe Display Page -->
+                            <th scope="row"><a href="{{url_for('recipe_display', recipe_id=recipe._id)}}">{{ recipe.recipe_name }}</a></th>
+                            <td>{{ recipe['_id'].generation_time.date().strftime('%d.%m.%Y') }}</td>
+                            <td>{{ recipe.author.username }}</td>
+                            <td>{{ recipe.favourite_count }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Deleted Recipes Report Card -->
+            <div class="card-header collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">
+                <a class="card-title">
+                  <b>Deleted Recipes Report</b>
+                </a>
+            </div>
+            <div id="collapseThree" class="card-body collapse" data-parent="#accordion">
+                
+                <!-- Total Deleted Recipes Count -->
+                <p><em>Deleted Recipe Count - {{ deleted.count() }}</em></p>
+                <table class="table table-hover">
+                    
+                    <!-- Deleted Recipes Table Headings -->
+                    <thead>
+                        <tr>
+                            <th scope="col">Recipe</th>
+                            <th scope="col">Date Deleted</th>
+                            <th scope="col">Deleted By</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    
+                    <!-- Deleted Recipes Table Info -->
+                    <tbody>
+                        {% for recipe in deleted %}
+                        <tr>
+                            <th scope="row"><a href="{{url_for('deleted_recipe_display', recipe_id=recipe._id)}}">{{ recipe.recipe_name }}</a></th>
+                            <td>{{ recipe.deleted_on }}</td>
+                            <td>{{ recipe.deleted_by.username }}</td>
+                            <td></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+<!-- /ADMIN PAGE -->
+
+{% endblock %}

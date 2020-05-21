@@ -1,0 +1,164 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container-fluid">
+
+    <!-- RECIPE DISPLAY -->
+    <div class="row">
+        <div class="recipe col-md-6 offset-md-3">
+            
+            <!-- Recipe Name -->
+            <h2 class="text-center">{{recipe.recipe_name|title}}</h2>
+            
+            <!-- If no photo link is available, a stock photo is used instead -->
+            {% if recipe.photo_url == "" %}
+            <img src="/static/images/backup.jpg" class="card-img-display" alt="{{recipe.recipe_name}}">
+            
+            {% else %}
+            
+            <!-- Recipe Image Display -->
+            <img src="{{recipe.photo_url}}" class="card-img-display" alt="{{recipe.recipe_name}}">
+            {% endif %}
+            
+            <!-- Recipe Stats -->
+            <ul class="list-group list-group-flush text-center">
+                <li class="list-group-item"><i class="fas fa-utensils"></i><strong> Servings:</strong><span class="recipe-stats"> {{recipe.servings}} </span></li>
+                <li class="list-group-item"><i class="far fa-clock"></i><strong> Preptime:</strong><span class="recipe-stats"> {{recipe.preptime}}</span></li>
+                <li class="list-group-item"><i class="fas fa-burn"></i><strong> Calories:</strong><span class="recipe-stats"> {{recipe.calories}}</span></li>
+                
+                <!-- Recipe Tags -->
+                <li class="list-group-item"><i class="fas fa-tags"></i>
+                <strong>Tags:</strong> 
+                    {% for tag in recipe.tags %}
+                    <span class="recipe-stats"> #{{ tag|title }}</span> 
+                    {% endfor %}
+                </li>
+                
+                <!-- Recipe Author -->
+                <li class="list-group-item">
+                    <i class="fas fa-user"></i><strong> Added by:</strong>
+                    <span class="recipe-stats"> 
+                        
+                        <!-- Link to Recipe Author's Page of Recipes -->
+                        <a class="here-link" href="{{url_for('profile', user=recipe.author.username) }}">{{ recipe.author.username|title }}</a>
+                    </span>
+                </li>
+                <li class="list-group-item">
+                <strong><em> 
+                        {% if recipe.favourite_count|int == 0 %}
+                        This Recipe has not been Favourited yet
+                        {% else %}
+                        This Recipe has been Favourited <span class="recipe-stats">{{ recipe.favourite_count }}</span> {% if recipe.favourite_count|int == 1 %} time {% else %} times{% endif %}{% endif %}
+                </em></strong>
+                        
+                </li>
+            </ul>
+
+            <div class="recipe-buttons text-center">
+                
+                <!-- If the User is logged in, the below buttons are available to them -->
+                {% if session.user %}
+                
+                <!-- Add to Favourites Button -->
+                <a role="button" class="btn btn-main" href="{{url_for('add_to_favourites', recipe_id=recipe._id)}}">Add to Favourites</a>
+                
+                <!-- Edit Recipe Button -->
+                <a role="button" class="btn btn-details" href="{{url_for('edit_recipe', recipe_id=recipe._id)}}">Edit Recipe</a>
+                
+                <!-- Delete Recipe Button (launches Delete Recipe Modal) -->
+                <button type="button" class="btn btn-delete" data-toggle="modal" data-target="#deletemodal">Delete Recipe</button> 
+                {% else %}
+                
+                <!-- Otherwise the buttons are disabled -->
+                <a role="button" class="btn btn-main disabled" href="#">Add to Favourites</a>
+                <a role="button" class="btn btn-details disabled" href="#">Edit Recipe</a>
+                <a role="button" class="btn btn-delete disabled" href="#">Delete Recipe</a>
+                <p class="text-muted">
+                <em>You must be logged in to Edit or Delete a recipe!
+                    <!-- Links to Login or Register -->
+                    <br>Click to <a class="here-link" href="{{url_for('login')}}">Login</a> or <a class="here-link" href="{{url_for('register')}}">Register</a> Now
+                </em>
+                </p>
+                {% endif %}
+            </div>
+            
+            <!-- Recipe Ingredients -->
+            <div class="recipe-heading">
+            <strong>Ingredients:</strong>
+                <ul>
+                    {% for ingredient in recipe.ingredients %}
+                    <li class="ingredients">{{ingredient}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <!-- Recipe Instructions -->
+            <div class="recipe-heading">
+            <strong>Instructions:</strong>
+                <ul>
+                    <li class="instructions">{{recipe.instructions}}</li>
+                </ul>
+            </div>
+            
+            <!-- Recipe Nutrional Info -->
+            <div class="recipe-heading">
+            <strong>Nutritional Info:</strong>
+                <ul class="nutritional-info">
+                    <li>
+                        Fats: {{ recipe.fat }}
+                    </li>
+                    <li>
+                        SatFats: {{ recipe.satfat }}
+                    </li>
+                    <li>
+                        Carbs: {{ recipe.carbs }}
+                    </li>
+                    <li>
+                        Fiber: {{ recipe.fiber }}
+                    </li>
+                    <li>
+                        Sugar: {{ recipe.sugar }}
+                    </li>
+                    <li>
+                        Protein: {{ recipe.protein }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- RECIPE DISPLAY -->
+    
+    
+    <!-- DELETE RECIPE MODAL -->
+    <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="deleterecipe" aria-hidden="true">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center ">Delete Recipe</h4>
+                    
+                    <!-- Close Modal Button -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!--  Delete Recipe Warning amble -->
+                    <p class="delete-warning"><span style="color:#f4150f"><i class="fas fa-exclamation-circle"></i><strong> WARNING</strong>:</span> Deleting this recipe will permanently remove it from the website for all users.
+                    <br>Are you sure you want to permamently delete this recipe?</p>
+                </div>
+                <div class="delete-buttons text-center">
+                    
+                    <!-- Cancel Delete Button -->
+                    <button type="button" class="btn btn-details" data-dismiss="modal">No, Go Back</button>
+                    
+                    <!-- Confirm Delete Recipe Button -->
+                    <a role="button" href="{{url_for('delete_recipe', recipe_id=recipe._id)}}" class="btn btn-delete">Yes, Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /DELETE RECIPE MODAL -->
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,103 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container-fluid">
+    
+    <!-- ADD RECIPE FORM -->
+    <div class="row">
+        <div class="col-12 col-sm-8 offset-sm-2">
+            <form action="{{ url_for('insert_recipe') }}" method="POST">
+                <fieldset>
+                    <h2 class="page-heading">Add Your Recipe</h2>
+                    
+                    <!-- Recipe Name Field - this is a required field -->
+                    <div class="form-group">
+                        <label for="recipe_name"><h5>Recipe Name</h5></label>
+                        <input type="text" class="form-control" name="recipe_name" id="recipe_name" placeholder="Add Recipe Name Here" required="true">
+                    </div>
+
+                    <!-- Recipe Preptime Field -->
+                    <div class="form-group">
+                        <label for="preptime"><h5>Time<em>(minutes)</em></h5></label>
+                        <input type="text" class="form-control" name="preptime" id="preptime" placeholder="Add Preptime Here">
+                    </div>
+                    <div class="form-row">
+
+                        <!-- Recipe Servings Field -->
+                        <div class="form-group col-sm-6">
+                            <label for="servings"><h5>Servings</h5></label>
+                            <input class="form-control" name="servings" id="servings" placeholder="Add Servings Here">
+                        </div>
+
+
+                    <!-- Recipe Image Field -->
+                    <div class="form-group">
+                        <label for="photo_url">
+                            <h5 class="form-headings">Image URL</h5>
+                            <small class="form-text text-muted"><em>Copy the link of an image and paste it below.</em></small>    
+                        </label>
+                        <input type="text" class="form-control" name="photo_url" id="photo_url" placeholder="Add Photo URL Here">
+                    </div>
+
+                    <div id="ingredient-parent" class="form-group">
+                        <label for="ingredients"><h5>Ingredients</h5></label> 
+                        <div class="input-group add-on ingredient-block" id="ingredient-block">
+                            
+                            <!-- Recipe Ingredient Field -->
+                            <input type="text" class="form-control ingredient" name="ingredients" id="ingredient" placeholder="Add Ingredient Here">
+                            
+                            <!-- Button to Delete an Ingredient Field -->
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-delete delete-ingredient-button">Delete</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Button to Add a New Ingredient Field -->
+                        <button type="button" id="new-ingredient" class="btn btn-details btn-sm">Add New Ingredient +</button>
+                    </div>
+                    
+                    <!-- Recipe Instructions Box Field -->
+                    <div class="form-group">
+                        <label for="instructions"><h5>Instructions</h5></label>
+                        <textarea class="form-control" id="instructions" rows="8" name="instructions" placeholder="Add Instructions Here"></textarea>
+                    </div>
+                    
+                    
+                    <div id="tags-parent" class="input-group">
+                        <label for="tags">
+                            <h5 class="form-headings">Tags</h5>
+                            <small class="form-text text-muted"><em>Add Tags to make your recipe easier to search. Hashtags will be added after.</em></small>
+                        </label> 
+                        
+                        <!-- Recipe Tags Field -->
+                        <div class="input-group add-on tag-block">
+                            <input type="text" class="form-control" name="tags" placeholder="Add Tag Here">
+                            
+                            <!-- Button to Delete a Tag Field -->
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-delete delete-tag-button">Delete</button>
+                            </div>
+                        </div>
+                        
+                        <!-- Button to Add a New Tag Field -->
+                        <button type="button" class="btn btn-details btn-sm new-tag-button">Add New Tag +</button>
+                    </div>
+                    
+                    
+                    <div class="form-buttons">
+                        <!-- Submit Recipe Button -->
+                        <button type="submit" class="btn btn-primary" name="action">Submit</button>
+                        <!-- Cancel Button -->
+                        <a role="button" class="btn btn-delete" onclick="history.go(-1)">Cancel</a>
+                    </div>
+
+
+                </fieldset>
+            </form>
+        </div>
+    </div>
+    <!-- /ADD RECIPE FORM -->
+
+
+</div>
+
+{% endblock %}

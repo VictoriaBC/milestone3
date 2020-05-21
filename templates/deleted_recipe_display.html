@@ -1,0 +1,145 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container-fluid">
+
+    <!-- RECIPE DISPLAY -->
+    <div class="row">
+        <div class="recipe col-md-6 offset-md-3">
+            
+            <h1>*DELETED VIEW*</h1>
+            
+            <!-- Recipe Name -->
+            <h2 class="text-center">{{deleted_recipe.recipe_name|title}}</h2>
+            
+            <!-- If no photo link is available, a stock photo is used instead -->
+            {% if deleted_recipe.photo_url == "" %}
+            <img src="/static/images/backup.jpg" class="card-img-display" alt="{{deleted_recipe.recipe_name}}">
+            
+            {% else %}
+            
+            <!-- Recipe Image Display -->
+            <img src="{{deleted_recipe.photo_url}}" class="card-img-display" alt="{{deleted_recipe.recipe_name}}">
+            {% endif %}
+            
+            <!-- Recipe Stats -->
+            <ul class="list-group list-group-flush text-center">
+                <li class="list-group-item"><i class="fas fa-utensils"></i><strong> Servings:</strong><span class="recipe-stats"> {{deleted_recipe.servings}} </span></li>
+                <li class="list-group-item"><i class="far fa-clock"></i><strong> Preptime:</strong><span class="recipe-stats"> {{deleted_recipe.preptime}}</span></li>
+                <li class="list-group-item"><i class="fas fa-burn"></i><strong> Calories:</strong><span class="recipe-stats"> {{deleted_recipe.calories}}</span></li>
+                <li class="list-group-item"><i class="fas fa-trash"></i>
+                <strong> Deleted by:</strong>
+                    <span class="recipe-stats"> 
+                        <a class="here-link" href="{{url_for('profile', user=deleted_recipe.deleted_by.username) }}">{{deleted_recipe.deleted_by.username|title}}</a>
+                    </span>
+                </li>
+                
+                <!-- Recipe Tags -->
+                <li class="list-group-item"><i class="fas fa-tags"></i>
+                    <strong>Tags:</strong> 
+                    {% for tag in deleted_recipe.tags %}
+                    <span class="recipe-stats"> #{{ tag|title }}</span> 
+                    {% endfor %}
+                </li>
+                <!-- Recipe Deleted by -->
+                <li class="list-group-item">
+                    <i class="fas fa-user"></i><strong> Added by:</strong>
+                    <span class="recipe-stats"> 
+                        
+                        <!-- Link to Recipe Author's Page of Recipes -->
+                        <a class="here-link" href="{{url_for('profile', user=deleted_recipe.author.username) }}">{{ deleted_recipe.author.username|title }}</a>
+                    </span>
+                </li>
+                
+                
+            </ul>
+            
+            
+            <div class="recipe-buttons text-center">
+                
+                <!-- Restore Recipe Button (launches Restore Recipe Modal) -->
+                <button type="button" class="btn btn-delete" data-toggle="modal" data-target="#restoremodal">Restore Recipe</button> 
+
+                
+            </div>
+            
+            <!-- Recipe Ingredients -->
+            <div class="recipe-heading">
+                <strong>Ingredients:</strong>
+                <ul>
+                    {% for ingredient in deleted_recipe.ingredients %}
+                    <li class="ingredients">{{ingredient}}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <!-- Recipe Instructions -->
+            <div class="recipe-heading">
+                <strong>Instructions:</strong>
+                <ul>
+                    <li class="instructions">{{deleted_recipe.instructions}}</li>
+                </ul>
+            </div>
+            
+            <!-- Recipe Nutrional Info -->
+            <div class="recipe-heading">
+                <strong>Nutritional Info:</strong>
+                <ul class="nutritional-info">
+                    <li>
+                        Fats: {{ deleted_recipe.fat }}
+                    </li>
+                    <li>
+                        SatFats: {{ deleted_recipe.satfat }}
+                    </li>
+                    <li>
+                        Carbs: {{ deleted_recipe.carbs }}
+                    </li>
+                    <li>
+                        Fiber: {{ deleted_recipe.fiber }}
+                    </li>
+                    <li>
+                        Sugar: {{ deleted_recipe.sugar }}
+                    </li>
+                    <li>
+                        Protein: {{ deleted_recipe.protein }}
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- /RECIPE DISPLAY -->
+    
+    
+    <!-- RESTORE RECIPE MODAL -->
+    <div class="modal fade" id="restoremodal" tabindex="-1" role="dialog" aria-labelledby="restorerecipe" aria-hidden="true">
+        <div class="modal-dialog " role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title text-center ">Restore Recipe</h4>
+                    
+                     <!--Close Modal Button -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                      <!--Restore Recipe Warning amble -->
+                    <p class="delete-warning"><span style="color:#f4150f"><i class="fas fa-exclamation-circle"></i><strong> WARNING</strong>:</span> Restoring this recipe will pass it back into the active Recipes collection and remove it from the Deleted collection.
+                    <br>Are you sure you want to restore this recipe?</p>
+                </div>
+                <div class="delete-buttons text-center">
+                    
+                     <!--Cancel Restore Button -->
+                    <button type="button" class="btn btn-details" data-dismiss="modal">No, Go Back</button>
+                    
+                     <!--Confirm Restore Recipe Button -->
+                    <a role="button" href="{{url_for('restore_recipe', recipe_id=deleted_recipe._id)}}" class="btn btn-delete">Yes, Restore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /RESTORE RECIPE MODAL -->
+
+</div>
+
+{% endblock %}

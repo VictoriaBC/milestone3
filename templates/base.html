@@ -1,0 +1,141 @@
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.1.1/css/hover-min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Easy Dinner</title>
+</head>
+
+<body>
+    
+    <!--- NAVBAR from Bootstrap/Bootswatch  --->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        
+        <!--- Brand Name  --->
+        <a class="navbar-brand" href="{{url_for('get_recipes')}}"><strong><i>Easy Dinner</i></strong></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse ml-auto" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto active">
+                
+                <!--- Browse Recipes Link  --->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('get_recipes')}}">Browse Recipes</a>
+                </li>
+                
+                <!--- If the User is signed in, they will see the below navbar links  --->
+                {% if session.user %}
+                
+                <!--- User Recipes Link  --->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('profile', user=session.user)}}">My Recipes</a>
+                </li>
+                
+                <!--- User Favourite Recipes Link  --->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('my_favourites', user=session.user)}}">My Favourites</a>
+                </li>
+                
+                <!--- Add a New Recipe Link  --->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('add_recipe')}}">Add Recipe</a>
+                </li>
+                
+                <!--- If the User is the Admin(named "admin"), they will see the below navbar link  --->
+                {% if session.user == "admin" %}
+                
+                <!--- Admin Reports Link  --->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('admin')}}">Admin Area</a>
+                </li>
+                {% endif %}
+                
+                <!--- Log Out Link  --->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('logout')}}">Log Out</a>
+                </li>
+                
+                
+                
+                <!--- If the User is not signed in, they will see the below navbar links  --->
+                
+                {% else %}
+                
+                <!--- Login Link  --->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('login')}}">Login</a>
+                </li>
+                
+                <!--- Register Link  --->
+                <li class="nav-item">
+                    <a class="nav-link" href="{{url_for('register')}}">Register</a>
+                </li>
+                {% endif %}
+                
+            </ul>
+        </div>
+    </nav>
+
+    <!--- /NAVBAR from Bootstrap/Bootswatch  --->
+    
+    
+    <!--- ALERTS CONTAINER --->
+    <!--- Taken and modified from Miroslav Svec's (username Miro) sessions from Slack DCD channel --->
+    <div class="container-fluid">
+        <div id="alerts">
+            <div class="row justify-content-center ">
+                <div id="messages " class="col-8 ">
+
+                    {% with messages = get_flashed_messages() %} {% if messages %} {% for message in messages %}
+                    <div class="alert alert-warning ">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">&times;</button>
+                        <p class="text-center ">{{ message }}</p>
+                    </div>
+                    {% endfor %} {% endif %} {% endwith %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--- /ALERTS CONTAINER --->
+
+
+
+    {% block content %} {% endblock %}
+    
+    <!--- FOOTER --->
+    <footer class="footer d-flex mt-auto">
+        <div class="container-fluid text-center ">
+            <div class="text-center center-block ">
+                <br />
+                <!--- Social Media Links --->
+                <a href="https://github.com/VictoriaBC" target="_blank "><i id="social-gh " class="fab fa-github fa-3x social "></i></a>
+                <a href="https://www.linkedin.com/in/victoriabc/" target="_blank "><i id="social-li " class="fab fa-linkedin fa-3x social "></i></a>
+                <a href="https://www.instagram.com/vpben/" target="_blank "><i id="social-in " class="fab fa-instagram fa-3x social "></i></a>
+                <!--- /Social Media Links --->
+            </div>
+            <div class="copyright ">
+                <span style="font-style:italic ">Victoria © 2020</span>
+            </div>
+        </div>
+    </footer>
+    <!--- /FOOTER --->
+    
+    
+    <!-- SCRIPTS -->
+    
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="{{ url_for( 'static', filename='js/main.js' ) }}"></script>
+    
+    <!-- /SCRIPTS -->
+    
+</body>
+
+</html>

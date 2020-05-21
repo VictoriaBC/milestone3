@@ -1,0 +1,206 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container-fluid empty-page">
+
+    <!-- SEARCH BOX -->
+    
+    <div class="row">
+        <div class="col-12 col-sm-8 offset-sm-2">
+            
+            <!-- Search Query Input Field -->
+            <form class="recipe-search input-group" action="{{ url_for('search', word_search=word_search, current_page=current_page) }}">
+                <input type="text" class="form-control" placeholder="Search Recipes" id="word_search" name="word_search">
+                
+                <!-- Submit Search Query Button -->
+                <div class="input-group-append">
+                    <button class="btn btn-details" type="submit" name="action"><i class="fa fa-search"></i></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- /SEARCH BOX -->
+    
+    
+    <!-- Search Results Count -->
+    <div class="search-results text-center">
+        <h6>Your search for <em>" <span class="recipe-stats">{{ word_search }}</span> " </em> produced <span class="recipe-stats">{{ results_count }}</span> search results</h6>
+    </div>
+
+    <hr>
+    
+    <!-- SEARCH RESULTS -->
+    
+    <div class="row">
+        
+        <!-- If the search query produces results, the below Recipe Card Results will be displayed -->
+        {% if results.count() %} {% for result in results %}
+        <div class="col-sm-12 col-md-6 col-lg-4 mx-auto">
+            <div class="card text-center">
+                <div class="card-body text-center">
+                    
+                    <!-- Link to Results Recipe Display on the Recipe Image -->
+                    <a href="{{ url_for('recipe_display', recipe_id=result._id) }}">
+                        
+                        <!-- If no photo link is added, a stock photo is used instead -->
+                        {% if result.photo_url == "" %}
+                        <img src="/static/images/backup.jpg" class="card-img-top" alt="{{result.recipe_name}}">
+                        {% else %}
+                        
+                        <!-- Results' Recipe Image Display -->
+                        <img src="{{result.photo_url}}" class="card-img-top" alt="{{result.recipe_name}}">
+                        {% endif %}
+                    </a>
+                    
+                    <!-- Results Recipe Name-->
+                    <h4 class="card-title"><a class="name-link" href="{{url_for('recipe_display', recipe_id=result._id)}}">{{result.recipe_name|title}}</a></h4>
+                    <hr>
+
+                    <div class="row card-details-wrapper">
+                        
+                        <!-- Results Recipe Servings -->
+                        <div class="card-details col-6 ">
+                            <span class="recipe-icon"><i class="fas fa-user fa-2x"></i></span>
+                            <span class="recipe-input"> {{result.servings}} </span>
+                            <span class="recipe-variable">Servings</span>
+                        </div>
+                        
+                        <!-- Results Recipe Preptime -->
+                        <div class="card-details col-6 ">
+                            <span class="recipe-icon"><i class="fas fa-clock fa-2x"></i></span>
+                            <span class="recipe-input">{{result.preptime}}</span>
+                            <span class="recipe-variable">Minutes</span>
+                        </div>
+                        
+                        <!-- Results Recipe Calories -->
+                        <div class="card-details col-6 offset-3 ">
+                            <span class="recipe-icon"><i class="fas fa-burn fa-2x"></i></span>
+                            <span class="recipe-input">{{result.calories}}</span>
+                            <span class="recipe-variable">Calories</span>
+                        </div>
+                    </div>
+
+                    <hr>
+                    
+                    <!-- View Full Recipe Button -->
+                    <a href="{{ url_for('recipe_display', recipe_id=result._id) }}" class="btn btn-main">View Full Recipe</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %} 
+        
+        <!-- /SEARCH RESULTS --> 
+        
+        
+        <!-- If the search query produces no results, the below message is displayed as well as the Most Popular Section -->
+        {% else %}
+
+        <div class="col-12 text-center">
+
+            <p>NO RESULTS!</p>
+
+            <h4>Change your search terms and try again.
+                <br>Or...
+            </h4>
+            
+            <!-- MOST POPULAR SECTION -->
+    
+            <div class="row popular">
+                
+                <div class="popular-header col-12 text-center">
+                    
+                    <h5><em>Try one of the current top 3 most popular recipes</em></h5>
+                    
+                </div>
+            
+                        {% for favourite in recommended%}
+            
+                <div class="col-sm-12 col-md-6 col-lg-4 mx-auto popular-card">
+                    <div class="card text-center">
+                        <div class="card-body text-center">
+                            
+                            <!--Link to Most Popular Recipe Display on the Recipe Image -->
+                            <a href="{{url_for('recipe_display', recipe_id=favourite._id)}}">
+                                
+                                <!--If no photo link is added, a stock photo is used instead -->
+                                {% if favourite.photo_url == "" %}
+                                <img src="/static/images/backup.jpg" class="card-img-top" alt="{{favourite.recipe_name}}">
+                                {% else %}
+                                
+                                <!--Most Popular Recipe Image Display -->
+                                <img src="{{favourite.photo_url}}" class="card-img-top" alt="{{favourite.recipe_name}}">
+                                {% endif %} 
+                            </a>
+                            
+                            <!--Most Popular Recipe Name-->
+                            <h4 class="card-title"><a class="name-link" href="{{url_for('recipe_display', recipe_id=favourite._id)}}">{{favourite.recipe_name|title}}</a></h4>
+                            
+                            <div class="row card-details-wrapper">
+                                
+                                <!--Most Popular Recipe Servings -->
+                                <div class="card-details col-6 ">
+                                    <span class="recipe-icon"><i class="fas fa-user fa-2x"></i></span>
+                                    <span class="recipe-input"> {{ favourite.servings }} </span>
+                                    <span class="recipe-variable">Servings</span>
+                                </div>
+                                
+                                <!--Most Popular Recipe Preptime -->
+                                <div class="card-details col-6 ">
+                                    <span class="recipe-icon"><i class="fas fa-clock fa-2x"></i></span> 
+                                    <span class="recipe-input">{{ favourite.preptime }}</span> 
+                                    <span class="recipe-variable">Minutes</span>
+                                </div>
+                                
+                                <!--Most Popular Recipe Calories -->
+                                <div class="card-details col-6 offset-3 ">
+                                    <span class="recipe-icon"><i class="fas fa-burn fa-2x"></i></span> 
+                                    <span class="recipe-input">{{ favourite.calories }}</span> 
+                                    <span class="recipe-variable">Calories</span>
+                                </div>
+                            </div>
+                            <strong><em>No. of times Favourited: <span class="recipe-stats">{{ favourite.favourite_count }}</span></em></strong>
+                            <hr>
+                            
+                             <!--Most Popular Full Recipe View Button -->
+                            <a href="{{url_for('recipe_display', recipe_id=favourite._id)}}" class="btn btn-main modal-trigger">View Full Recipe</a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>    
+    </div>
+
+    <!-- PAGINATION CONTROLS -->
+    <nav aria-label="Page navigation" class="col-lg-6 offset-lg-3">
+        <ul class="pagination pagination-sm justify-content-center">
+            
+            <!-- If the current page is the first page in the results, the Previous Button is hidden -->
+            <li {% if current_page|int==1 %} class="d-none" {% else %} class="page-item" {% endif %}>
+                
+                <!-- Previous Button Link -->
+                <a class="page-link" {% if current_page|int> 1 %} href="{{ url_for('search', word_search=word_search, current_page=current_page|int -1 ) }}" {% endif %}tabindex="-1">Previous</a>
+            </li>
+            
+            
+            {% for page_number in results_pages %} {% if page_number == current_page %}
+            <li class="page-item active"><a class="page-link">{{ page_number }}</a></li>
+            {% else %}
+            
+            <!-- Links to the other pages in the results -->
+            <li class="page-item"><a class="page-link" href="{{ url_for('search', word_search=word_search, current_page=page_number) }}">{{ page_number }}</a></li>
+            {% endif %} {% endfor %}
+
+            <!-- If the page is the last page in the results, the Next Button will be hidden -->
+            <li {% if current_page|int>= total_page_no|int %} class="d-none" {% else %} class="page-item" {% endif %}>
+                
+                <!-- Next Button Link -->
+                <a class="page-link" {% if current_page|int < total_page_no|int %} href="{{ url_for('search', word_search=word_search, current_page=current_page|int +1 ) }}" {% endif %}>Next</a>
+            </li>
+
+        </ul>
+    </nav>
+    <!-- /PAGINATION CONTROLS -->
+</div>
+    {% endblock %}

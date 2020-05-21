@@ -1,0 +1,43 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container-fluid">
+
+    <!-- LOGIN CARD -->
+    <div class="row">
+        <div class="card text-white bg-primary mb-3 text-center login-card">
+            <div class="card-body">
+                <h2><u>LOGIN</u></h2>
+                
+                <!-- Default Profile Image -->
+                <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
+                <form method="POST" action="/user_auth">
+                    <div class="form-group">
+                        <label for="username">Enter Username</label>
+                        
+                        <!-- Username Input Field -->
+                        <input name="username" type="text" class="form-control" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user_password">Enter Password</label>
+                        
+                        <!-- Password Input Field -->
+                        <input name="user_password" type="password" class="form-control" placeholder="Password">
+                    </div>
+                    
+                    <!-- Login Submit Button -->
+                    <button type="submit" class="btn btn-main btn-block user-form-button">Login</button>
+                    <div>
+                        
+                        <!-- Link to the Register page if the User does not have an account already -->
+                        <p><em>Don't have an account? Register <a class="here-link" href="{{ url_for('register') }}">HERE!</em></a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /LOGIN CARD -->
+
+</div>
+
+{% endblock %}

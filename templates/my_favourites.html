@@ -1,0 +1,164 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container-fluid empty-page">
+
+    <h2 class="page-heading"> Welcome {{ user.username|title }} </h2>
+
+    <h3>My Favourite Recipes</h3>
+
+    <h6>You currently have <span class="recipe-stats">{{ favourites_recipes|length }}</span> {% if favourites_recipes|length == 1 %}recipe {% else %} recipes {% endif %} in your Favourites </h6>
+
+    <!-- Section to encourage users to add recipes to their favourites -->
+    <div class="row">
+        <div class="col-sm-12 text-center">
+            <p>Want to add {% if favourites_recipes|length >= 1 %} more {% else %} some {% endif %} recipes to your favourites?</p>
+
+            <!-- Browse Recipe Button -->
+            <a role="button" class="btn btn-details" href="{{url_for('get_recipes')}}">Browse Recipes</a>
+        </div>
+    </div>
+
+    <!-- MOST POPULAR SECTION -->
+    <!--If the user has no favourited recipes yet, the Most Popular section appears-->
+    {% if favourites_recipes|length == 0 %}
+
+    <div class="row popular">
+
+        <div class="popular-header col-12 text-center">
+
+            <h5><em>
+                <br>Or...
+            <br>
+            <br>Need some inspiration? Try one of the current top 3 most popular recipes</em></h5>
+
+        </div>
+
+        {% for rec in recommended%}
+
+        <div class="col-sm-12 col-md-6 col-lg-4 mx-auto popular-card">
+            <div class="card text-center">
+                <div class="card-body text-center">
+
+                    <!--Link to Most Popular Recipe Display on the Recipe Image -->
+                    <a href="{{url_for('recipe_display', recipe_id=rec._id)}}">
+
+                        <!--If no photo link is added, a stock photo is used instead -->
+                        {% if rec.photo_url == "" %}
+                        <img src="/static/images/backup.jpg" class="card-img-top" alt="{{rec.recipe_name}}"> {% else %}
+
+                        <!--Most Popular Recipe Image Display -->
+                        <img src="{{rec.photo_url}}" class="card-img-top" alt="{{rec.recipe_name}}"> {% endif %}
+                    </a>
+
+                    <!--Most Popular Recipe Name-->
+                    <h4 class="card-title"><a class="name-link" href="{{url_for('recipe_display', recipe_id=rec._id)}}">{{rec.recipe_name|title}}</a></h4>
+
+                    <div class="row card-details-wrapper">
+
+                        <!--Most Popular Recipe Servings -->
+                        <div class="card-details col-6 ">
+                            <span class="recipe-icon"><i class="fas fa-user fa-2x"></i></span>
+                            <span class="recipe-input"> {{ rec.servings }} </span>
+                            <span class="recipe-variable">Servings</span>
+                        </div>
+
+                        <!--Most Popular Recipe Preptime -->
+                        <div class="card-details col-6 ">
+                            <span class="recipe-icon"><i class="fas fa-clock fa-2x"></i></span>
+                            <span class="recipe-input">{{ rec.preptime }}</span>
+                            <span class="recipe-variable">Minutes</span>
+                        </div>
+
+                        <!--Most Popular Recipe Calories -->
+                        <div class="card-details col-6 offset-3 ">
+                            <span class="recipe-icon"><i class="fas fa-burn fa-2x"></i></span>
+                            <span class="recipe-input">{{ rec.calories }}</span>
+                            <span class="recipe-variable">Calories</span>
+                        </div>
+                    </div>
+                    <strong><em>No. of times Favourited: <span class="recipe-stats">{{ rec.favourite_count }}</span></em></strong>
+                    <hr>
+
+                    <!--Most Popular Full Recipe View Button -->
+                    <a href="{{url_for('recipe_display', recipe_id=rec._id)}}" class="btn btn-main modal-trigger">View Full Recipe</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    <!-- /MOST POPULAR SECTION -->
+
+    {% else %} 
+
+    <hr>
+
+    <!-- USER'S FAVOURITE RECIPES - Displays all recipes that the User has previously added to their favourites -->
+    <div class="row">
+
+
+        {% for favourite in favs %}
+        <div class="col-sm-12 col-md-6 col-lg-4 mx-auto">
+            <div class="card text-center">
+                <div class="card-body text-center">
+
+                    <!-- Link to Favourite Recipe Display on the Recipe Image -->
+                    <a href="{{ url_for('recipe_display', recipe_id=favourite._id) }}">
+
+                        <!-- If no photo link is added, a stock photo is used instead -->
+                        {% if favourite.photo_url == "" %}
+                        <img src="/static/images/backup.jpg" class="card-img-top" alt="{{favourite.recipe_name}}"> {% else %}
+
+                        <!-- Favourite Recipe Image Display -->
+                        <img src="{{favourite.photo_url}}" class="card-img-top" alt="{{favourite.recipe_name}}"> {% endif %}
+                    </a>
+
+                    <!-- Favourite Recipe Name-->
+                    <h4 class="card-title"><a class="name-link" href="{{url_for('recipe_display', recipe_id=favourite._id)}}">{{favourite.recipe_name|title}}</a></h4>
+
+                    <hr>
+
+                    <div class="row card-details-wrapper">
+
+                        <!-- Favourite Recipe Servings -->
+                        <div class="card-details col-6 ">
+                            <span class="recipe-icon"><i class="fas fa-user fa-2x"></i></span>
+                            <span class="recipe-input"> {{ favourite.servings }} </span>
+                            <span class="recipe-variable">Servings</span>
+                        </div>
+
+                        <!-- Favourite Recipe Preptime -->
+                        <div class="card-details col-6 ">
+                            <span class="recipe-icon"><i class="fas fa-clock fa-2x"></i></span>
+                            <span class="recipe-input">{{ favourite.preptime }}</span>
+                            <span class="recipe-variable">Minutes</span>
+                        </div>
+
+                        <!-- Favourite Recipe Calories -->
+                        <div class="card-details col-6 offset-3 ">
+                            <span class="recipe-icon"><i class="fas fa-burn fa-2x"></i></span>
+                            <span class="recipe-input">{{ favourite.calories }}</span>
+                            <span class="recipe-variable">Calories</span>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <!-- View Full Recipe Button -->
+                    <a href="{{ url_for('recipe_display', recipe_id=favourite._id) }}" class="btn btn-main">View Full Recipe</a>
+
+                    <!-- Delete from Favourites Button -->
+                    <a role="button" href="{{ url_for('remove_from_favourites', recipe_id=favourite._id, user=user['username']) }}" class="btn btn-delete">Remove from Favourites</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    
+    {% endif %}
+    <!-- /USER'S FAVOURITE RECIPES -->
+
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,150 @@
+{% extends 'base.html' %} {% block content %}
+
+<div class="container-fluid">
+
+
+    <!-- ADD RECIPE FORM -->
+    <div class="row">
+        <div class="col-12 col-sm-8 offset-sm-2">
+            <form action="{{ url_for('update_recipe', recipe_id=recipe._id) }}" method="POST">
+                <button type="button" class="btn btn-details btn-lg page-heading" onclick="history.go(-1)">Back to Recipe</button>
+                <fieldset>
+                    <h2 class="page-heading">Edit Recipe</h2>
+                    
+                    <!-- Edit Recipe Name Field -->
+                    <div class="form-group">
+                        <label for="recipe_name"><h5>Recipe Name</h5></label>
+                        <input type="text" class="form-control" name="recipe_name" id="recipe_name" value="{{ recipe.recipe_name|title }}">
+                    </div>
+                    
+                    <!-- Edit Recipe Image URL Field -->
+                    <div class="form-group">
+                        <label for="photo_url">
+                            <h5 class="form-headings">Recipe Image URL</h5>
+                            <small class="form-text text-muted"><em>Copy the link of an image and paste it below.</em></small>    
+                        </label>
+                        <input type="text" class="form-control" name="photo_url" id="photo_url" value="{{ recipe.photo_url }}">
+                    </div>
+                    
+                    <!-- Edit Recipe Preptime Field -->
+                    <div class="form-group">
+                        <label for="preptime"><h5>Preptime <em>(minutes)</em></h5></label>
+                        <input type="text" class="form-control" name="preptime" id="preptime" value="{{ recipe.preptime }}">
+                    </div>
+                    
+                    <div class="form-row">
+                        
+                        <!-- Edit Recipe Servings Field -->
+                        <div class="form-group col-sm-6">
+                            <label for="servings"><h5>Servings</h5></label>
+                            <input class="form-control" name="servings" id="servings" value="{{ recipe.servings }}">
+                        </div>
+                        
+                        <!-- Edit Recipe Calories Field -->
+                        <div class="form-group col-sm-6">
+                            <label for="calories"><h5>Calories</h5></label>
+                            <input type="text" class="form-control" id="calories" name="calories" value="{{ recipe.calories }}">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        
+                        <!-- Edit Recipe Fats Field -->
+                        <div class="form-group col-6 col-sm-4">
+                            <label for="fat"><h6>Fats</h6></label>
+                            <input type="text" class="form-control" id="fat" name="fat" value="{{ recipe.fat }}">
+                        </div>
+                        
+                        <!-- Edit Recipe Saturated Fats Field -->
+                        <div class="form-group col-6 col-sm-4">
+                            <label for="satfat"><h6>Saturated Fats</h6></label>
+                            <input type="text" class="form-control" id="satfat" name="satfat" value="{{ recipe.satfat }}">
+                        </div>
+                        
+                        <!-- Edit Recipe Carbohydrates Field -->
+                        <div class="form-group col-6 col-sm-4">
+                            <label for="carbs"><h6>Carbs</h6></label>
+                            <input type="text" class="form-control" id="carbs" name="carbs" value="{{ recipe.carbs }}">
+                        </div>
+                        
+                        <!-- Edit Recipe Fibre Field -->
+                        <div class="form-group col-6 col-sm-4">
+                            <label for="fiber"><h6>Fibre</h6></label>
+                            <input type="text" class="form-control" id="fiber" name="fiber" value="{{ recipe.fiber }}">
+                        </div>
+                        
+                        <!-- Edit Recipe Sugar Field -->
+                        <div class="form-group col-6 col-sm-4">
+                            <label for="sugar"><h6>Sugar</h6></label>
+                            <input type="text" class="form-control" id="sugar" name="sugar" value="{{ recipe.sugar }}">
+                        </div>
+                        
+                        <!-- Edit Recipe Protein Field -->
+                        <div class="form-group col-6 col-sm-4">
+                            <label for="protein"><h6>Protein</h6></label>
+                            <input type="text" class="form-control" id="protein" name="protein" value="{{ recipe.protein }}">
+                        </div>
+                    </div>
+                    
+                    <div id="ingredient-parent" class="form-group">
+                        <label for="ingredients"><h5>Ingredients</h5></label> 
+                        {% for ingredient in recipe.ingredients %}
+                        <div class="input-group add-on ingredient-block" id="ingredient-block">
+                            
+                            <!-- Edit Recipe Ingredients Fields -->
+                            <input type="text" class="form-control ingredient" name="ingredients" id="ingredients" value="{{ ingredient }}"> 
+                            
+                            <!-- Button to Delete an Ingredient Field -->
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-delete delete-ingredient-button">Delete</button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                        <!-- Button to Add a New Ingredient Field -->
+                        <button type="button" id="new-ingredient" class="btn btn-details btn-sm">Add New Ingredient +</button>
+                    </div>
+                    
+                    <!-- Edit Recipe Instructions Box Field -->
+                    <div class="form-group">
+                        <label for="instructions"><h5>Instructions</h5></label>
+                        <textarea class="form-control" id="instructions" rows="8" name="instructions" value="{{ recipe.instructions }}">{{ recipe.instructions }}</textarea>
+                    </div>
+                    <div id="tags-parent" class="input-group">
+                        <label for="tags">
+                            <h5 class="form-headings">Tags</h5>
+                            <small class="form-text text-muted"><em>Add Tags to make your recipe easier to search. Hashtags will be added after.</em></small>
+                        </label> 
+                        
+                        {% for tag in recipe.tags %}
+                        
+                        <!-- Edit Recipe Tags Field -->
+                        <div class="input-group add-on tag-block">
+                            <input type="text" class="form-control" name="tags" value="{{ tag|title }}">
+                            
+                            <!-- Button to Delete a Tag Field -->
+                            <div class="input-group-append" >
+                                <button type="button" class="btn btn-delete delete-tag-button">Delete</button>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                        <!-- Button to Add a New Tag Field -->
+                        <button type="button" class="btn btn-details btn-sm new-tag-button">Add New Tag +</button>
+                    </div>
+                    <div class="form-buttons">
+                        
+                        <!-- Submit Edited Recipe Button -->
+                        <button type="submit" class="btn btn-main" name="action">Submit</button>
+                        
+                        <!-- Cancel Button -->
+                        <a role="button" class="btn btn-delete" onclick="history.go(-1)">Cancel</a>
+                    </div>
+
+                    
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
