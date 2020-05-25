@@ -1,9 +1,49 @@
 <!DOCTYPE html>
-<title></title>
-<head></head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.1.1/css/hover-min.css" type="text/css" />
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Welcome to Easy Dinner</title>
+</head>
 <body>
 
 {% extends 'base.html' %} {% block content %}
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        
+        <!--- Brand Name  --->
+        <a class="navbar-brand" href="get_recipes.html">Easy Dinner</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse ml-auto" id="navbarNavDropdown">
+            <ul class="navbar-nav ml-auto active">
+                
+                <!--- Browse Recipes Link  --->
+                <li class="nav-item">
+                    <a class="nav-link" href="get_recipes.html">Browse Recipes</a>
+                </li>
+                
+                <!--- If the User is signed in, they will see the below navbar links  --->
+                
+                
+                <!--- Login Link  --->
+                <li class="nav-item">
+                    <a class="nav-link" href="login.html">Login</a>
+                </li>
+                
+                <!--- Register Link  --->
+                <li class="nav-item">
+                    <a class="nav-link" href="register.html">Register</a>
+                </li>
+                
+                
+            </ul>
+        </div>
+    </nav>
 <!-- Container for Background Image -->
 <div class="intro-container img-responsive container-fluid">
     
@@ -14,11 +54,38 @@
         <p class="intro-subheading"><i>Search for easy dinner recipes after a busy day. All recipes have no more that 5 ingredients and are made fast. You can also add your recipes and save your favourites. Enjoy cooking and Bon appetite!</i></p>
 
     </div>
-
     <div class="row">
         
         <!-- Large Call-to-Action Button Group -->
-</div>
+<div class="col-lg-12 text-center">
+            
+            <!-- Browse Recipes Button Link -->
+            <a href="get_recipes.html" class="btn btn-sq-lg btn-main">
+                    
+                    <!-- Recipe Cookbook Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="90" height="90" viewBox="0 0 172 172" style=" fill:#000000;"><g fill="none" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal"><path d="M0,172v-172h172v172z" fill="none"></path><g fill="#ffffff"><path d="M45.86667,17.2c-9.50013,0 -17.2,7.69987 -17.2,17.2v103.2c0.00029,1.52596 0.60882,2.98887 1.69089,4.06484c2.02291,7.24685 7.65651,13.13516 15.50911,13.13516h91.73333c2.06765,0.02924 3.99087,-1.05709 5.03322,-2.843c1.04236,-1.78592 1.04236,-3.99474 0,-5.78066c-1.04236,-1.78592 -2.96558,-2.87225 -5.03322,-2.843h-91.73333c-3.23951,0 -5.73333,-2.49383 -5.73333,-5.73333c0,-3.23951 2.49383,-5.73333 5.73333,-5.73333h86c6.33533,0 11.46667,-5.13133 11.46667,-11.46667v-91.73333c0,-6.33533 -5.13133,-11.46667 -11.46667,-11.46667zM110.48984,40.21172c4.38313,-0.39847 8.6155,0.86654 11.65704,3.90807c6.08306,6.08307 5.09801,16.92829 -2.19479,24.22109c-5.5728,5.5728 -13.21829,7.44061 -19.22683,5.30781l-33.60495,33.59375c-2.24173,2.24173 -5.86009,2.24173 -8.09609,0c-2.24173,-2.24173 -2.24173,-5.86009 0,-8.09609l13.13516,-13.14636l-7.34583,-7.34583c-8.58854,-8.58853 -10.54844,-21.78649 -4.81511,-32.49635l26.00156,26.00157l6.61797,-6.61797c-2.1328,-6.00853 -0.27619,-13.64283 5.29661,-19.21563c3.64927,-3.64927 8.19212,-5.7156 12.57526,-6.11406zM101.52031,87.67969l11.46667,11.46667c2.24173,2.236 2.24173,5.87129 0,8.10729c-2.24173,2.24173 -5.87129,2.24173 -8.10729,0l-11.46667,-11.46667z"></path></g></g></svg><br>
+                    <span style="font-size: 14px;">Start Cooking!</span>
+            </a>
+            
+            <!-- Sign In Button Link -->
+            <a href="login.html" class="btn btn-pink btn-sq-lg ">
+                <i class="fas fa-sign-in-alt fa-5x intro-icon"></i><br>
+                 
+                <span style="line-height: 38px; font-size: 14px;">
+                    Sign In 
+                </span>
+            </a>
+            
+            <!-- Create Account Button Link -->
+            <a href="register.html" class="btn btn-sq-lg btn-details">
+                  <i class="fas fa-user-plus fa-5x intro-icon"></i><br>
+                <span style="line-height: 38px; font-size: 14px;">
+                    Create Account
+                </span>
+            </a>
+            
+            
+        </div>
 {% endblock %}
 </body>
 </html>
